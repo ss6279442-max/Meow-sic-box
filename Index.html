@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Feri</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Baloo 2', cursive;
+        overflow: hidden;
+        transition: background 2s ease-in-out;
+    }
+
+    #text-box {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 25px 50px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: transform 0.4s, opacity 0.5s, box-shadow 0.4s;
+    }
+
+    #text-box:hover {
+        transform: scale(1.15) rotate(-2deg);
+        box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    }
+
+    .float {
+        position: absolute;
+        font-size: 2rem;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.8;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(100vh) scale(0.6); opacity: 1; }
+        to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div id="text-box">Click Me 💙🤍🖤🩷</div>
+
+<script>
+const texts = [
+    "Your smile brightens everything",
+    "So magical, so precious",
+    "Happiness looks good on you",
+    "A little angel on the web",
+    "Keep shining, beautiful",
+    "You make everything better",
+    "So cute and lovely, wow"
+];
+
+const backgrounds = [
+    "linear-gradient(135deg, #87ceeb, #ffffff)", 
+    "linear-gradient(135deg, #ffb6c1, #ffffff)", 
+    "linear-gradient(135deg, #000000, #ffffff)", 
+    "linear-gradient(135deg, #ffb6c1, #87ceeb)", 
+    "linear-gradient(135deg, #000000, #87ceeb)", 
+    "linear-gradient(135deg, #000000, #ffb6c1)"
+];
+
+const textColors = ["#000000", "#ffffff", "#87ceeb", "#ff69b4"];
+const emojis = ["💙", "🤍", "🖤", "🩷", "✨", "🌟"];
+const textBox = document.getElementById("text-box");
+
+function getRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function changeTextAndColor() {
+    textBox.style.opacity = 0;
+    setTimeout(() => {
+        textBox.textContent = getRandom(texts);
+        textBox.style.color = getRandom(textColors);
+        document.body.style.background = getRandom(backgrounds);
+        textBox.style.opacity = 1;
+    }, 500);
+}
+
+function createFloat() {
+    const el = document.createElement("div");
+    el.classList.add("float");
+    el.textContent = getRandom(emojis);
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+}
+
+setInterval(changeTextAndColor, 2500);
+setInterval(createFloat, 700);
+textBox.addEventListener("click", changeTextAndColor);
+changeTextAndColor();
+</script>
+
+</body>
+</html>
